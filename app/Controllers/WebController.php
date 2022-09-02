@@ -77,18 +77,25 @@ class WebController extends BaseController
     {
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
+
+        //Verificando se email foi preenchido
         if(empty($email)){
             return $this->respondDeleted([
                 "status" => 422,
                 "message" => "Email não informado"
             ]);
         }
+
+        //Verificando se senha foi preenchido
         if(empty($password)){
             return $this->respondDeleted([
                 "status" => 422,
                 "message" => "Senha não informada"
             ]);
         }
+
+        //Verificando se existe algum usuário com o email informado e se a senha
+        // é igual a informada
         $exist_journalist = $this->journalist->where('email', $email)->first();
         if(!$exist_journalist || !password_verify($password, $exist_journalist['password'])){
             return $this->respondDeleted([
@@ -114,7 +121,5 @@ class WebController extends BaseController
             "token" => $token,
             "message" => "Usuário logado com sucesso"
         ]);
-
-
     }
 }
