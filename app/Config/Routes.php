@@ -25,6 +25,8 @@ $routes->set404Override();
 //Rotas que não irão precisar de autenticação
 $routes->group('api', function($routes) {
         $routes->post('register', 'WebController::register');
+        $routes->post('login', 'WebController::login');
+
 });
 
 
