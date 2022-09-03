@@ -21,7 +21,7 @@ class NewsTypeController extends BaseController
        $types = $this->type_news->where('journalist_id', $_SESSION['token_jwt']->data->user_id)->findAll();
        return $this->respond($types, 200);
     }
-    
+
     public function create()
     {
         $data = [
@@ -109,6 +109,6 @@ class NewsTypeController extends BaseController
         }
         return $this->respondDeleted([
             "message" => "Registro deletado com sucesso"
-        ], 502);
+        ]);
     }
 }
