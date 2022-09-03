@@ -87,13 +87,6 @@ class NewsTypeController extends BaseController
 
     public function delete(int $id)
     {
-        //Verificando se o tipo de noticia pertence ao usuário logado
-        if(!$this->type_news->where('journalist_id', $_SESSION['token_jwt']->data->user_id)->where('id', $id)->first()){
-            return $this->respond([
-                "message" => "Não é possível excluír esse tipo de notícia"
-            ], 422);
-        }
-
         //Verificando se não tem nenhuma notícia associada a esse tipo de notícia
         if((new News)->where('news_type_id', $id)->find()){
             return $this->respond([
