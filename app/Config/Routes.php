@@ -33,6 +33,8 @@ $routes->group('api', function($routes) {
         //Retorna os dados do jornalista
         $routes->get('me', 'JournalistController::journalistMe', ['filter' => 'Auth']);
 
+        // Lista os tipos de notícia
+        $routes->get('type/me', 'NewsTypeController::newsTypeMe', ['filter' => 'Auth']);
         // Cria um tipo de noticia
         $routes->post('type/create', 'NewsTypeController::create', ['filter' => 'Auth']);
         // Altera tipo de notícia

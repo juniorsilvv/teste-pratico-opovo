@@ -15,6 +15,13 @@ class NewsTypeController extends BaseController
     {
         $this->type_news = new NewsType();
     }
+
+    public function newsTypeMe()
+    {
+       $types = $this->type_news->where('journalist_id', $_SESSION['token_jwt']->data->user_id)->findAll();
+       return $this->respond($types, 200);
+    }
+    
     public function create()
     {
         $data = [
