@@ -22,11 +22,25 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 
+$routes->get('/', function(){
+    session_start();
+    var_dump($_SESSION);
+});
 $routes->group('api', function($routes) {
         $routes->post('register', 'WebController::register');
         $routes->post('login', 'WebController::login');
 
+        //Retorna os dados do jornalista
         $routes->get('me', 'JournalistController::journalistMe', ['filter' => 'Auth']);
+
+        // Cria um tipo de noticia
+        $routes->post('type/create', 'NewsTypeController::create', ['filter' => 'Auth']);
+        // Altera tipo de notícia
+        $routes->put('type/update/(:num)', 'NewsTypeController::update/$1', ['filter' => 'Auth']);
+        // Deleta Tipo de notícia
+        $routes->delete('type/delete/(:num)', 'NewsTypeController::delete/$1', ['filter' => 'Auth']);
+
+
 });
 
 
