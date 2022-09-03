@@ -22,12 +22,13 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 
-//Rotas que não irão precisar de autenticação
 $routes->group('api', function($routes) {
         $routes->post('register', 'WebController::register');
         $routes->post('login', 'WebController::login');
 
+        $routes->get('me', 'JournalistController::journalistMe', ['filter' => 'Auth']);
 });
+
 
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
