@@ -42,6 +42,19 @@ $routes->group('api', function($routes) {
         // Deleta Tipo de notícia
         $routes->delete('type/delete/(:num)', 'NewsTypeController::delete/$1', ['filter' => 'Auth']);
 
+        // Lista as notícias
+        $routes->get('news/me', 'NewsController::newsMe', ['filter' => 'Auth']);
+        // Lista as notícias por tipo
+        $routes->get('news/me/(:num)', 'NewsController::newsTypeMe/$1', ['filter' => 'Auth']);
+        // Cria a notícia
+        $routes->post('news/create', 'NewsController::create', ['filter' => 'Auth']);
+        // Altera a notícia
+        $routes->put('news/update/(:num)', 'NewsController::update/$1', ['filter' => 'Auth']);
+        // Deleta Tipo de notícia
+        $routes->delete('news/delete/(:num)', 'NewsController::delete/$1', ['filter' => 'Auth']);
+
+        
+
 
 });
 
