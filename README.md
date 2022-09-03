@@ -11,4 +11,4 @@ Realize as migrações.
         `php spark migrate`
 
 
-Para rodar a aplicação execute `php spark serve`
+Para iniciar a aplicação execute `php spark serve`
