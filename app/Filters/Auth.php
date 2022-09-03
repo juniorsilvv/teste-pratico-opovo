@@ -51,7 +51,8 @@ class Auth implements FilterInterface
 
   
         try {
-            JWT::decode($token, new Key($key, 'HS256'));
+            // Cria uma sessão com os dados do jwt para poder ter o user_id do jornalista
+            $_SESSION['token_jwt'] = JWT::decode($token, new Key($key, 'HS256'));
         } catch (\Exception $ex) {
             $response->setBody('Acesso Negado');
             $response->setStatusCode(401);
@@ -73,6 +74,7 @@ class Auth implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        //limpar sessão
+        unset($_SESSION['token_jwt']);
     }
 }
