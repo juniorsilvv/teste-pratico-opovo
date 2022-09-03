@@ -20,19 +20,7 @@ class JournalistController extends BaseController
 
     public function journalistMe()
     {
-        $key = getenv('TOKEN_SECRET_KEY');
-        $header = $this->request->getServer('HTTP_AUTHORIZATION');
-        $token = null;
-  
-        // explode para ter acesso ao token
-        if(!empty($header)) {
-            if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
-                $token = $matches[1];
-            }
-        }
-        $jwt = JWT::decode($token, new Key($key, 'HS256'));
-        $journalist = $this->journalist->find($jwt->data->user_id);
-
+        $journalist = $this->journalist->find($_SESSION['token_jwt']->data->user_id);
         return $this->respond([
             "email" => $journalist['email'],
             "first_name" => $journalist['first_name'],
