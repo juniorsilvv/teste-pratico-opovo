@@ -2,13 +2,14 @@
 
 ## Configurações iniciais
 
-Renomei o arquivo env_exemples para .env
+Renomei o arquivo env_exemples para .env.
 
-Crie o banco de dados e adicione as crendenciais no arquivo .env na sessão marcada como DATABASE
+Crie o banco de dados e adicione as crendenciais no arquivo .env na sessão marcada como DATABASE.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Realize as migrações.
+    Abra a pasta do projeto no terminal e execute o seguinte comando:
+        php spark migrate
+
 
 More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
 
