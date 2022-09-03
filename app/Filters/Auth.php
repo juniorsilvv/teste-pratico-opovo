@@ -33,7 +33,7 @@ class Auth implements FilterInterface
         $header = $request->getServer('HTTP_AUTHORIZATION');
         $token = null;
   
-        // extract the token from the header
+        // explode para ter acesso ao token
         if(!empty($header)) {
             if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
                 $token = $matches[1];
