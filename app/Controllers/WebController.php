@@ -26,28 +26,28 @@ class WebController extends BaseController
         
         // validando se o first_name foi preenchido
         if(empty($data['first_name'])){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Primeiro nome não informado"
             ]);
         }
         // validando se o last_name foi preenchido
         if(empty($data['last_name'])){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Sobrenome não informado"
             ]);
         }
         // validando se o email foi preenchido
         if(empty($data['email'])){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Email não informado"
             ]);
         }
         // validando se o email foi preenchido
         if(empty($data['password'])){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Senha não informado"
             ]);
@@ -56,19 +56,19 @@ class WebController extends BaseController
         // Verificando se o email informado já está cadastrado
         $exist_email = $this->journalist->where('email', $data['email'])->first();
         if($exist_email){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Email já cadastrado"
             ]);
         }
 
         if(!$this->journalist->save($data)){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 502,
-                "message" => "tudo ok"
+                "message" => "Erro ao cadastrar jornalista"
             ]);
         }
-        return $this->respondDeleted([
+        return $this->respondCreated([
                 "status" => 201,
                 "message" => "Jornalista cadastrado com sucesso"
         ]);
@@ -80,7 +80,7 @@ class WebController extends BaseController
 
         //Verificando se email foi preenchido
         if(empty($email)){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Email não informado"
             ]);
@@ -88,7 +88,7 @@ class WebController extends BaseController
 
         //Verificando se senha foi preenchido
         if(empty($password)){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Senha não informada"
             ]);
@@ -98,7 +98,7 @@ class WebController extends BaseController
         // é igual a informada
         $exist_journalist = $this->journalist->where('email', $email)->first();
         if(!$exist_journalist || !password_verify($password, $exist_journalist['password'])){
-            return $this->respondDeleted([
+            return $this->respond([
                 "status" => 422,
                 "message" => "Email ou senha inválidos"
             ]);
@@ -107,8 +107,10 @@ class WebController extends BaseController
         $payload = [
             'iss' => 'localhost',
             'aud' => 'localhost',
-            'exp' => getenv('TOKEN_EXPIRE'),
-            //dados do meu usuário
+            'iat' => time(),
+            'nbf' => time(),
+            'exp' => time() + getenv('TOKEN_EXPIRE'),
+            //dados do usuário
             'data' => [
                 'user_id' => $exist_journalist['id'],
                 'first_name' =>  $exist_journalist['first_name'],
@@ -116,7 +118,7 @@ class WebController extends BaseController
             ]
         ];
         $token = JWT::encode($payload, getenv('TOKEN_SECRET_KEY'), 'HS256');
-        return $this->respondDeleted([
+        return $this->respond([
             "status" => 200,
             "token" => $token,
             "message" => "Usuário logado com sucesso"
