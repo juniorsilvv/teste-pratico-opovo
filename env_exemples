@@ -138,3 +138,7 @@ database.default.port = 3306
 #--------------------------------------------------------------------
 
 # curlrequest.shareOptions = true
+
+TOKEN_SECRET_KEY = 'testepraticoopovo'
+
+TOKEN_EXPIRE = 300
