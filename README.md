@@ -1,9 +1,10 @@
 # Configuração Teste Prático Desenvolvedor Back-end iV Grupo O Povo
 
-## What is CodeIgniter?
+## Configurações iniciais
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
+Renomei o arquivo env_exemples para .env
+
+Crie o banco de dados e adicione as crendenciais no arquivo .env na sessão marcada como DATABASE
 
 This repository holds a composer-installable app starter.
 It has been built from the
