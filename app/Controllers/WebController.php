@@ -27,49 +27,42 @@ class WebController extends BaseController
         // validando se o first_name foi preenchido
         if(empty($data['first_name'])){
             return $this->respond([
-                "status" => 422,
                 "message" => "Primeiro nome não informado"
-            ]);
+            ], 422);
         }
         // validando se o last_name foi preenchido
         if(empty($data['last_name'])){
             return $this->respond([
-                "status" => 422,
                 "message" => "Sobrenome não informado"
-            ]);
+            ], 422);
         }
         // validando se o email foi preenchido
         if(empty($data['email'])){
             return $this->respond([
-                "status" => 422,
                 "message" => "Email não informado"
-            ]);
+            ], 422);
         }
         // validando se o email foi preenchido
         if(empty($data['password'])){
             return $this->respond([
-                "status" => 422,
                 "message" => "Senha não informado"
-            ]);
+            ], 422);
         }
        
         // Verificando se o email informado já está cadastrado
         $exist_email = $this->journalist->where('email', $data['email'])->first();
         if($exist_email){
             return $this->respond([
-                "status" => 422,
                 "message" => "Email já cadastrado"
-            ]);
+            ], 422);
         }
 
         if(!$this->journalist->save($data)){
             return $this->respond([
-                "status" => 502,
                 "message" => "Erro ao cadastrar jornalista"
-            ]);
+            ], 502);
         }
         return $this->respondCreated([
-                "status" => 201,
                 "message" => "Jornalista cadastrado com sucesso"
         ]);
     }
@@ -81,17 +74,15 @@ class WebController extends BaseController
         //Verificando se email foi preenchido
         if(empty($email)){
             return $this->respond([
-                "status" => 422,
                 "message" => "Email não informado"
-            ]);
+            ], 422);
         }
 
         //Verificando se senha foi preenchido
         if(empty($password)){
             return $this->respond([
-                "status" => 422,
                 "message" => "Senha não informada"
-            ]);
+            ], 422);
         }
 
         //Verificando se existe algum usuário com o email informado e se a senha
@@ -112,16 +103,13 @@ class WebController extends BaseController
             'exp' => time() + getenv('TOKEN_EXPIRE'),
             //dados do usuário
             'data' => [
-                'user_id' => $exist_journalist['id'],
-                'first_name' =>  $exist_journalist['first_name'],
-                'last_name' =>  $exist_journalist['last_name']
+                'user_id' => $exist_journalist['id']
             ]
         ];
         $token = JWT::encode($payload, getenv('TOKEN_SECRET_KEY'), 'HS256');
         return $this->respond([
-            "status" => 200,
             "token" => $token,
             "message" => "Usuário logado com sucesso"
-        ]);
+        ], 200);
     }
 }
