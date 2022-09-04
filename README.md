@@ -1,5 +1,7 @@
 # Configuração Teste Prático Desenvolvedor Back-end iV Grupo O Povo
 
+ 
+
 ## Configurações iniciais
 
 Execute o comando `composer install` para o composer instalar as dependências necessárias
@@ -73,6 +75,9 @@ Para iniciar a aplicação execute `php spark serve`
 * POST /api/news/create  `Rota de cadastro das noticias`
 * PUT /api/news/update/  `Rota de alteração das notícias. OBS: necessário informar o id`
 * DELETE /news/type/delete/  `Rota de delete das notícias. OBS: necessário informar o id`
+
+
+# Teste feito utilizando Codeigniter 4 e Mysql 
 
 
 
