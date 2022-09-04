@@ -15,7 +15,7 @@ Realize as migrações.
 
 Para iniciar a aplicação execute `php spark serve`
 
-# Dados a ser em enviado.
+# Dados a serem enviado.
 
 ### Cadastro:
 * first_name  `Obrigátorio`
