@@ -60,6 +60,23 @@ Para iniciar a aplicação execute `php spark serve`
 # Middleware
 * Auth.php responsável pela validação das requisições `App/Filter/Auth`
 
+# Rotas
+* POST /api/register  `Rota de cadastro de jornalista`
+* POST /api/login  `Rota de login de jornalista`
+* GET /api/me  `Retorna os dados do jornalista`
+* GET /api/type/me  `Retorna os tipos de noticias`
+* POST /api/type/create  `Rota de cadastro dos tipos de notícias`
+* PUT /api/type/update/  `Rota de alteração dos tipos de notícias. OBS: necessário informar o id`
+* DELETE /api/type/delete/  `Rota de delete dos tipos de notícias. OBS: necessário informar o id`
+* GET /api/news/me  `Retornas todas as notícias do jornalista`
+* GET /api/news/me/  `Retorna todas as noticias por tipo de noticia do jornalista. OBS: necessário informar o id`
+* POST /api/news/create  `Rota de cadastro das noticias`
+* PUT /api/news/update/  `Rota de alteração das notícias. OBS: necessário informar o id`
+* DELETE /news/type/delete/  `Rota de delete das notícias. OBS: necessário informar o id`
+
+
+
+
 
 
 
