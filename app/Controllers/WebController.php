@@ -90,9 +90,8 @@ class WebController extends BaseController
         $exist_journalist = $this->journalist->where('email', $email)->first();
         if(!$exist_journalist || !password_verify($password, $exist_journalist['password'])){
             return $this->respond([
-                "status" => 422,
                 "message" => "Email ou senha inválidos"
-            ]);
+            ], 422);
         }
 
         $payload = [
